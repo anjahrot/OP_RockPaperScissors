@@ -23,32 +23,34 @@ function getHumanChoice() {
     return humanChoice;
 }
 
-//Declare players score variables humanScore and computerScore (initVal = 0)
-let humanScore = 0;
-let compScore = 0;
 
-//Function playRound that takes humanChoice (parameter case insensitive) and computerChoice as arguments
-//console.log the winner and result
-function playRound(humanChoice, compChoice){
-   if (humanChoice === compChoice){
-    console.log(`It is a tie! Both players chose ${humanChoice}. `);
-   }
-   else if (humanChoice === "rock" && compChoice === "scissors" || humanChoice === "scissors" 
-    && compChoice === "paper" || humanChoice === "paper" && compChoice === "rock" ){
-    console.log(`You win! ${humanChoice} beats ${compChoice}.`);
-    //increment humanScore value if player wins
-    humanScore++;
-   }
-   else {
-    console.log(`You loose! ${compChoice} beats ${humanChoice}`);
-    //increment compScore value if comp wins
-    compScore++;
-   }
-}
 
-//playGame function declared inside playGame to play five rounds
+//playRound function declared inside playGame to play five rounds
 
 function playGame(){
+    //Declare players score variables humanScore and computerScore (initVal = 0)
+   let humanScore = 0;
+   let compScore = 0;
+
+   //Function playRound that takes humanChoice (parameter case insensitive) and computerChoice as arguments
+   //console.log the winner and result
+   function playRound(humanChoice, compChoice){
+      if (humanChoice === compChoice){
+       console.log(`It is a tie! Both players chose ${humanChoice}. `);
+      }
+      else if (humanChoice === "rock" && compChoice === "scissors" || humanChoice === "scissors" 
+        && compChoice === "paper" || humanChoice === "paper" && compChoice === "rock" ){
+        console.log(`You win! ${humanChoice} beats ${compChoice}.`);
+        //increment humanScore value if player wins
+        humanScore++;
+      }
+      else {
+        console.log(`You loose! ${compChoice} beats ${humanChoice}`);
+        //increment compScore value if comp wins
+        compScore++;
+      }
+   }
+
     for (let i=1; i<=5; i++){
         const humanSelection = getHumanChoice();
         const computerSelection = getComputerChoice();
@@ -64,7 +66,6 @@ function playGame(){
         console.log(`It is a tie! Both has ${humanScore} points. `);
     }
 }
-
 
 playGame();
 
