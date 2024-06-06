@@ -1,5 +1,3 @@
-console.log("Hello! Ready to play a game? ")
-
 //computerChoice - get with Math.random()
 function getComputerChoice() {
     let number = Math.floor(Math.random()*3);
@@ -24,48 +22,76 @@ function getHumanChoice() {
 }
 
 
+//Declare players score variables humanScore and computerScore (initVal = 0)
+let humanScore = 0;
+let compScore = 0;
 
-//playRound function declared inside playGame to play five rounds
-
-function playGame(){
-    //Declare players score variables humanScore and computerScore (initVal = 0)
-   let humanScore = 0;
-   let compScore = 0;
-
-   //Function playRound that takes humanChoice (parameter case insensitive) and computerChoice as arguments
-   //console.log the winner and result
-   function playRound(humanChoice, compChoice){
+//Function playRound that takes humanChoice (parameter case insensitive) and computerChoice as arguments
+//console.log the winner and result
+function playRound(humanChoice, compChoice){
       if (humanChoice === compChoice){
-       console.log(`It is a tie! Both players chose ${humanChoice}. `);
+       result.textContent = `It is a tie! Both players chose ${humanChoice}. `
       }
       else if (humanChoice === "rock" && compChoice === "scissors" || humanChoice === "scissors" 
         && compChoice === "paper" || humanChoice === "paper" && compChoice === "rock" ){
-        console.log(`You win! ${humanChoice} beats ${compChoice}.`);
+        result.textContent = `You win! ${humanChoice} beats ${compChoice}.`;
         //increment humanScore value if player wins
         humanScore++;
       }
       else {
-        console.log(`You loose! ${compChoice} beats ${humanChoice}`);
+        result.textContent = `You loose! ${compChoice} beats ${humanChoice}`;
         //increment compScore value if comp wins
         compScore++;
       }
    }
 
-    for (let i=1; i<=5; i++){
-        const humanSelection = getHumanChoice();
-        const computerSelection = getComputerChoice();
-        playRound(humanSelection, computerSelection);
-    }
-    if(humanScore>compScore){
-        console.log(`You win! ${humanScore} points against ${compScore}. `);
-    }
-    else if (compScore>humanScore) {
-        console.log(`You loose! ${compScore} points against ${humanScore}. `);
-    }
-    else {
-        console.log(`It is a tie! Both has ${humanScore} points. `);
-    }
-}
+//Adding buttons for player to select choice
+const btnRock = document.createElement("button");
+btnRock.textContent = 'Rock';
+const btnPaper = document.createElement("button");
+btnPaper.textContent = 'Paper';
+const btnScissors = document.createElement("button");
+btnScissors.textContent = 'Scissors';
 
-playGame();
+const buttons = document.querySelector('#btnSelectors');
+buttons.appendChild(btnRock);
+buttons.appendChild(btnPaper);
+buttons.appendChild(btnScissors);
+
+//Addding heading
+const heading = document.createElement("h1");
+heading.textContent = "Hello! Ready to play a game? ";
+document.body.insertBefore(heading, buttons);
+
+//Adding div to display results
+const result = document.createElement("div");
+document.body.appendChild(result);
+
+//Single-eventhandler to handle all click-events
+document.addEventListener('click', (event) => {
+    let text = event.target.textContent;
+    let compSelection = getComputerChoice();
+    let playerSelection;
+
+    switch(text) {
+        case 'Rock':
+            playerSelection = text.toLowerCase();
+            playRound(playerSelection,compSelection);
+            break;
+        case 'Paper':
+            playerSelection = text.toLowerCase();
+            playRound(playerSelection,compSelection);
+            break;
+        case 'Scissors':
+            playerSelection = text.toLowerCase();
+            playRound(playerSelection,compSelection);
+            break;
+    }
+});
+
+
+
+
+
+
 
