@@ -21,57 +21,51 @@ let compScore = 0;
 //Function playRound that takes humanChoice (parameter case insensitive) and computerChoice as arguments
 //console.log the winner and result
 function playRound(humanChoice, compChoice){
-      if (humanScore === 5) gameResult.textContent = 'You win!'
-      else if (compScore === 5) gameResult.textContent = 'Computer wins!'
-      else if (humanChoice === compChoice){
-       roundResult.textContent = `It is a tie! Both players chose ${humanChoice}. `
-      }
-      else if (humanChoice === "rock" && compChoice === "scissors" || humanChoice === "scissors" 
-        && compChoice === "paper" || humanChoice === "paper" && compChoice === "rock" ){
-        roundResult.textContent = `You win! ${humanChoice} beats ${compChoice}.`;
-        //increment humanScore value if player wins
-        humanScore++;
-        playerScore.textContent = `Points: ${humanScore} `;
-      }
-      else {
-        roundResult.textContent = `You loose! ${compChoice} beats ${humanChoice}`;
-        //increment compScore value if comp wins
-        compScore++;
-        computerScore.textContent = `Points: ${compScore} `;
-      }
-   }
+      
+        if (humanChoice === compChoice){
+            roundResult.textContent = `It is a tie! Both players chose ${humanChoice}. `
+            }
+        else if (humanChoice === "rock" && compChoice === "scissors" || humanChoice === "scissors" 
+            && compChoice === "paper" || humanChoice === "paper" && compChoice === "rock" ){
+            roundResult.textContent = `You win! ${humanChoice} beats ${compChoice}.`;
+            //increment humanScore value if player wins
+            humanScore++;
+            playerScore.textContent = `${humanScore} `;
+            //end game if reached 5 points
+            if(humanScore === 5) gameResult.textContent = 'You win!' ;
+            }
+        else {
+            roundResult.textContent = `You loose! ${compChoice} beats ${humanChoice}`;
+            //increment compScore value if comp wins
+            compScore++;
+            computerScore.textContent = `${compScore} `;
 
+            if (compScore === 5) gameResult.textContent = 'Computer wins!' ;
+            }
+    
+    }
 //DOM - Adding buttons for player to select choice
 const btnRock = document.createElement("button");
 btnRock.textContent = 'Rock';
+btnRock.style.cssText = 'backgroundColor: darkblue; padding: 10px 20px; border-radius: 5px; font-size: 20px;';  
 const btnPaper = document.createElement("button");
 btnPaper.textContent = 'Paper';
+btnPaper.style.cssText = 'backgroundColor: darkblue; padding: 10px 20px; border-radius: 5px; font-size: 20px;';
 const btnScissors = document.createElement("button");
 btnScissors.textContent = 'Scissors';
+btnScissors.style.cssText = 'backgroundColor: darkblue; padding: 10px 20px; border-radius: 5px; font-size: 20px;';
 
 const buttons = document.querySelector('#btnSelectors');
 buttons.appendChild(btnRock);
 buttons.appendChild(btnPaper);
 buttons.appendChild(btnScissors);
 
-//Add heading at the top of the page
-const heading = document.createElement("h1");
-heading.textContent = "Hello! Ready to play a game? ";
-document.body.insertBefore(heading, buttons);
 
-//Adding div to display results
-const result = document.createElement("div");
-const roundResult = document.createElement("h3");
-const scores = document.createElement("ul");
-const playerScore = document.createElement("li");
-const computerScore = document.createElement("li");
-const gameResult = document.createElement("h2");
-result.appendChild(roundResult);
-scores.appendChild(playerScore);
-scores.appendChild(computerScore);
-result.appendChild(scores);
-result.appendChild(gameResult);
-document.body.appendChild(result);
+//Adding DOM-elements to display results
+const roundResult = document.querySelector("h3");
+const playerScore = document.querySelector("#humanScore");
+const computerScore = document.querySelector("#computerScore");
+const gameResult = document.querySelector("h2");
 
 //Single-eventhandler to handle all click-events
 document.addEventListener('click', (event) => {
