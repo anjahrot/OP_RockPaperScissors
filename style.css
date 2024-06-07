@@ -8,8 +8,10 @@ body {
 
 .header{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding-top: 40px;
 }
 
 
@@ -34,7 +36,15 @@ ul {
     align-items: center;
     list-style: none;
     font-size: 20px;
-    gap: 50px;
+    gap: 40px;
 }
 
+li {
+    padding-right: 30px;
+}
+
+.newgame {
+    display: flex;
+    justify-content: center;
+}
 

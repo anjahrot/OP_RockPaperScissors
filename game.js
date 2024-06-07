@@ -27,39 +27,50 @@ function playRound(humanChoice, compChoice){
             }
         else if (humanChoice === "rock" && compChoice === "scissors" || humanChoice === "scissors" 
             && compChoice === "paper" || humanChoice === "paper" && compChoice === "rock" ){
-            roundResult.textContent = `You win! ${humanChoice} beats ${compChoice}.`;
+            roundResult.textContent = `You win - ${humanChoice} beats ${compChoice}!`;
             //increment humanScore value if player wins
             humanScore++;
             playerScore.textContent = `${humanScore} `;
             //end game if reached 5 points
-            if(humanScore === 5) gameResult.textContent = 'You win!' ;
+            if(humanScore === 5) {
+                gameResult.textContent = 'You win!' ;
+                newgame.appendChild(btnNew);
             }
+        }
         else {
-            roundResult.textContent = `You loose! ${compChoice} beats ${humanChoice}`;
+            roundResult.textContent = `You loose - ${compChoice} beats ${humanChoice}!`;
             //increment compScore value if comp wins
             compScore++;
             computerScore.textContent = `${compScore} `;
 
-            if (compScore === 5) gameResult.textContent = 'Computer wins!' ;
+            if (compScore === 5) {
+                gameResult.textContent = 'Computer wins!' ;
+                newgame.appendChild(btnNew);
             }
     
-    }
+        }
+}
 //DOM - Adding buttons for player to select choice
 const btnRock = document.createElement("button");
 btnRock.textContent = 'Rock';
-btnRock.style.cssText = 'backgroundColor: darkblue; padding: 10px 20px; border-radius: 5px; font-size: 20px;';  
+btnRock.style.cssText = 'background-color: purple; padding: 10px 20px; border-radius: 5px; font-size: 20px;';  
 const btnPaper = document.createElement("button");
 btnPaper.textContent = 'Paper';
-btnPaper.style.cssText = 'backgroundColor: darkblue; padding: 10px 20px; border-radius: 5px; font-size: 20px;';
+btnPaper.style.cssText = 'background-color: purple; padding: 10px 20px; border-radius: 5px; font-size: 20px;';
 const btnScissors = document.createElement("button");
 btnScissors.textContent = 'Scissors';
-btnScissors.style.cssText = 'backgroundColor: darkblue; padding: 10px 20px; border-radius: 5px; font-size: 20px;';
+btnScissors.style.cssText = 'background-color: purple; padding: 10px 20px; border-radius: 5px; font-size: 20px;';
 
 const buttons = document.querySelector('#btnSelectors');
 buttons.appendChild(btnRock);
 buttons.appendChild(btnPaper);
 buttons.appendChild(btnScissors);
 
+//Adding button for new game
+const newgame = document.querySelector(".newgame");
+const btnNew = document.createElement("button");
+btnNew.style.cssText = 'background-color: purple; padding: 10px 20px; border-radius: 5px; font-size: 20px;';
+btnNew.textContent = "Play new game!";
 
 //Adding DOM-elements to display results
 const roundResult = document.querySelector("h3");
@@ -86,6 +97,14 @@ document.addEventListener('click', (event) => {
             playerSelection = text.toLowerCase();
             playRound(playerSelection,compSelection);
             break;
+        case 'Play new game!':
+            humanScore = 0;
+            compScore = 0;
+            playerScore.textContent = `${humanScore} `;
+            computerScore.textContent = `${compScore} `;
+            roundResult.textContent = '';
+            gameResult.textContent = '';
+            newgame.removeChild(newgame.firstElementChild);
     }
 });
 
